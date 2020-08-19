@@ -1,33 +1,37 @@
 <template>
   <div id="app">
-    <div class="headerBg"></div>
-    <div class="content">
-      <div class="contentImgFather">
-        <img class="contentImg" src="../src/assets/img-1.jpg" alt />
-      </div>
-      <div class="contentImgFather">
-        <img class="contentImg" src="../src/assets/img-1.jpg" alt />
-      </div>
-      <div class="contentImgFather">
-        <img class="contentImg" src="../src/assets/img-1.jpg" alt />
-      </div>
-      <div class="contentImgFather">
-        <img class="contentImg" src="../src/assets/img-1.jpg" alt />
-      </div>
-      <div class="contentImgFather">
-        <img class="contentImg" src="../src/assets/img-1.jpg" alt />
-      </div>
+    <div v-show="!isMobile">
+      <div class="headerBg"></div>
+      <div class="content">
+        <div class="contentImgFather">
+          <img class="contentImg" src="../src/assets/img-1.jpg" alt />
+        </div>
+        <div class="contentImgFather">
+          <img class="contentImg" src="../src/assets/img-1.jpg" alt />
+        </div>
+        <div class="contentImgFather">
+          <img class="contentImg" src="../src/assets/img-1.jpg" alt />
+        </div>
+        <div class="contentImgFather">
+          <img class="contentImg" src="../src/assets/img-1.jpg" alt />
+        </div>
+        <div class="contentImgFather">
+          <img class="contentImg" src="../src/assets/img-1.jpg" alt />
+        </div>
 
-      <div class="smallImgFather">
-        <img class="smallImg" src="../src/assets/img-1.jpg" alt />
-        <img class="smallImg" src="../src/assets/img-1.jpg" alt />
+        <div class="smallImgFather">
+          <img class="smallImg" src="../src/assets/img-1.jpg" alt />
+          <img class="smallImg" src="../src/assets/img-1.jpg" alt />
 
-        <img class="smallImg" src="../src/assets/img-1.jpg" alt />
-        <img class="smallImg" src="../src/assets/img-1.jpg" alt />
+          <img class="smallImg" src="../src/assets/img-1.jpg" alt />
+          <img class="smallImg" src="../src/assets/img-1.jpg" alt />
+        </div>
       </div>
     </div>
-    <div class="popBg" v-show="isMobile">
+
+    <div class="popBg">
       <img class="img" src="@/assets/scape.png" alt />
+      <div class="name">请竖屏手机</div>
     </div>
   </div>
 </template>
@@ -39,9 +43,13 @@ export default {
   data() {
     return {
       isMobile: false,
+      imgArr:[],
+      imgSmallArr:[]
+
     };
   },
   mounted() {
+
     var browser = {
       versions: (function () {
         var u = navigator.userAgent,
@@ -74,9 +82,9 @@ export default {
         "onorientationchange" in window ? "orientationchange" : "resize",
         () => {
           if (window.orientation === 180 || window.orientation === 0) {
+            this.isMobile = true;
           }
           if (window.orientation === 90 || window.orientation === -90) {
-            this.isMobile = true;
           }
         },
         false
@@ -84,8 +92,57 @@ export default {
     } else {
       //pc端进入这里
     }
+    this.get()
   },
-  methods: {},
+  methods: {
+    createXMLHTTPRequest() {
+      //1.创建XMLHttpRequest对象
+      //这是XMLHttpReuquest对象无部使用中最复杂的一步
+      //需要针对IE和其他类型的浏览器建立这个对象的不同方式写不同的代码
+      var xmlHttpRequest;
+      if (window.XMLHttpRequest) {
+        //针对FireFox，Mozillar，Opera，Safari，IE7，IE8
+        xmlHttpRequest = new XMLHttpRequest();
+        //针对某些特定版本的mozillar浏览器的BUG进行修正
+        if (xmlHttpRequest.overrideMimeType) {
+          xmlHttpRequest.overrideMimeType("text/xml");
+        }
+      } else if (window.ActiveXObject) {
+        //针对IE6，IE5.5，IE5
+        //两个可以用于创建XMLHTTPRequest对象的控件名称，保存在一个js的数组中
+        //排在前面的版本较新
+        var activexName = ["MSXML2.XMLHTTP", "Microsoft.XMLHTTP"];
+        for (var i = 0; i < activexName.length; i++) {
+          try {
+            //取出一个控件名进行创建，如果创建成功就终止循环
+            //如果创建失败，回抛出异常，然后可以继续循环，继续尝试创建
+            xmlHttpRequest = new ActiveXObject(activexName[i]);
+            if (xmlHttpRequest) {
+              break;
+            }
+          } catch (e) {}
+        }
+      }
+      return xmlHttpRequest;
+    },
+    get() {
+      var req = this.createXMLHTTPRequest();
+      if (req) {
+        req.open("GET", "./json.js", true);
+        req.onreadystatechange = function () {
+          if (req.readyState == 4) {
+            if (req.status == 200) {
+              this.imgSmallArr= req.obj.imgSmallArr;
+              this.imgArr= req.obj.imgArr;
+            } else {
+              alert("error");
+            }
+          }
+        };
+        req.send(null);
+      }
+    },
+  },
 };
 </script>
 
@@ -154,8 +211,14 @@ legend {
   position: fixed;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.name {
+  color: white;
+  font-size: 20px;
+  margin-top: 20px;
 }
 .img {
   -webkit-transform: rotate(180deg);
@@ -254,7 +317,7 @@ legend {
 /* 中等屏幕（桌面显示器，大于等于 992px） */
 @media (min-width: 992px）) {
   .img {
-    height: 400px;
+    height: 200px;
     width: auto;
   }
   .content {
@@ -289,7 +352,7 @@ legend {
 /* 大屏幕（大桌面显示器，大于等于 1200px） */
 @media (min-width: 1200px) {
   .img {
-    height: 600px;
+    height: 200px;
     width: auto;
   }
   .content {

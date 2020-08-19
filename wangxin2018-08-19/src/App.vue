@@ -31,6 +31,7 @@ export default {
     };
   },
   mounted() {
+    
     var browser = {
       versions: (function () {
         var u = navigator.userAgent,
@@ -170,96 +171,7 @@ legend {
   }
 }
 
-@media (max-width: 768px) {
-  .img {
-    height: 200px;
-    width: auto;
-  }
-  .content {
-    text-align: center;
-    width: 404px;
-    margin: 0 auto;
-    margin-top: 60px;
-  }
-  .contentImg {
-    display: inline-block;
-    width: 200px;
-    height: 200px;
-    margin: 30px;
-  }
-  .smallImgFather {
-    display: inline-block;
-    width: 200px;
-    height: 200px;
-    margin: 30px;
-  }
-  .smallImg {
-    width: 70px;
-    height: 70px;
-    margin: 8px;
-  }
-}
-/* 小屏幕（平板，大于等于 768px） */
-@media (min-width: 768px) {
-  .img {
-    height: 200px;
-    width: auto;
-  }
-  .content {
-    text-align: center;
-    width: 404px;
-    margin: 0 auto;
-    margin-top: 60px;
-  }
-  .contentImg {
-    display: inline-block;
-    width: 200px;
-    height: 200px;
-    margin: 30px;
-  }
-  .smallImgFather {
-    display: inline-block;
-    width: 200px;
-    height: 200px;
-    margin: 30px;
-  }
-  .smallImg {
-    width: 70px;
-    height: 70px;
-    margin: 8px;
-  }
-}
 
-/* 中等屏幕（桌面显示器，大于等于 992px） */
-@media (min-width: 992px) {
-  .img {
-    height: 400px;
-    width: auto;
-  }
-  .content {
-    text-align: center;
-    width: 800px;
-    margin: 0 auto;
-    margin-top: 60px;
-  }
-  .contentImg {
-    display: inline-block;
-    width: 200px;
-    height: 200px;
-    margin: 30px;
-  }
-  .smallImgFather {
-    display: inline-block;
-    width: 200px;
-    height: 200px;
-    margin: 30px;
-  }
-  .smallImg {
-    width: 70px;
-    height: 70px;
-    margin: 8px;
-  }
-}
 
 /* 大屏幕（大桌面显示器，大于等于 1200px） */
 @media (min-width: 1200px) {

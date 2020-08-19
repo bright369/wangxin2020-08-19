@@ -2,11 +2,22 @@
   <div id="app">
     <div class="headerBg"></div>
     <div class="content">
-      <img class="contentImg" src="../src/assets/img-1.jpg" alt />
-      <img class="contentImg" src="../src/assets/img-1.jpg" alt />
-      <img class="contentImg" src="../src/assets/img-1.jpg" alt />
-      <img class="contentImg" src="../src/assets/img-1.jpg" alt />
-      <img class="contentImg" src="../src/assets/img-1.jpg" alt />
+      <div class="contentImgFather">
+        <img class="contentImg" src="../src/assets/img-1.jpg" alt />
+      </div>
+      <div class="contentImgFather">
+        <img class="contentImg" src="../src/assets/img-1.jpg" alt />
+      </div>
+      <div class="contentImgFather">
+        <img class="contentImg" src="../src/assets/img-1.jpg" alt />
+      </div>
+      <div class="contentImgFather">
+        <img class="contentImg" src="../src/assets/img-1.jpg" alt />
+      </div>
+      <div class="contentImgFather">
+        <img class="contentImg" src="../src/assets/img-1.jpg" alt />
+      </div>
+
       <div class="smallImgFather">
         <img class="smallImg" src="../src/assets/img-1.jpg" alt />
         <img class="smallImg" src="../src/assets/img-1.jpg" alt />
@@ -31,7 +42,6 @@ export default {
     };
   },
   mounted() {
-    
     var browser = {
       versions: (function () {
         var u = navigator.userAgent,
@@ -171,7 +181,110 @@ legend {
   }
 }
 
+/* 超小屏幕（手机，小于 768px） */
+@media (max-width: 768px) {
+  .img {
+    height: 200px;
+    width: auto;
+  }
+  .content {
+    text-align: center;
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 60px;
+  }
+  .contentImgFather {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    margin: 30px;
+  }
+  .contentImg {
+    width: 200px;
+    height: 200px;
+  }
+  .smallImgFather {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    margin: 30px;
+  }
+  .smallImg {
+    width: 70px;
+    height: 70px;
+    margin: 8px;
+  }
+}
 
+/* 小屏幕（平板，大于等于 768px） */
+@media (min-width: 768px) {
+  .img {
+    height: 200px;
+    width: auto;
+  }
+  .content {
+    text-align: center;
+    width: 600px;
+    margin: 0 auto;
+    margin-top: 60px;
+  }
+  .contentImgFather {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    margin: 30px;
+  }
+  .contentImg {
+    width: 200px;
+    height: 200px;
+  }
+  .smallImgFather {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    margin: 30px;
+  }
+  .smallImg {
+    width: 70px;
+    height: 70px;
+    margin: 8px;
+  }
+}
+
+/* 中等屏幕（桌面显示器，大于等于 992px） */
+@media (min-width: 992px）) {
+  .img {
+    height: 400px;
+    width: auto;
+  }
+  .content {
+    text-align: center;
+    width: 800px;
+    margin: 0 auto;
+    margin-top: 60px;
+  }
+  .contentImgFather {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    margin: 30px;
+  }
+  .contentImg {
+    width: 200px;
+    height: 200px;
+  }
+  .smallImgFather {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    margin: 30px;
+  }
+  .smallImg {
+    width: 70px;
+    height: 70px;
+    margin: 8px;
+  }
+}
 
 /* 大屏幕（大桌面显示器，大于等于 1200px） */
 @media (min-width: 1200px) {
@@ -185,11 +298,15 @@ legend {
     margin: 0 auto;
     margin-top: 60px;
   }
-  .contentImg {
+  .contentImgFather {
     display: inline-block;
     width: 200px;
     height: 200px;
     margin: 30px;
+  }
+  .contentImg {
+    width: 200px;
+    height: 200px;
   }
   .smallImgFather {
     display: inline-block;
